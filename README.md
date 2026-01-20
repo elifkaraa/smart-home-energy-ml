@@ -72,6 +72,9 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 
 ## Model Performans Karşılaştırması
 
+<img width="436" height="124" alt="image" src="https://github.com/user-attachments/assets/78d347ac-a33d-456a-8814-50316ddacc0c" />
+
+
 | Model | R² Skoru | MAE |
 |-------|----------|-----|
 | Linear Regression | 0.833 | 0.135 |
