@@ -53,7 +53,22 @@ veri["month_avg_kw"] = veri["month"].map(month_pivot["use [kW]"])
 temp_pivot = veri.pivot_table(index="temperature", values="use [kW]", aggfunc="mean")
 veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])  
 ```
+## Kullanılan Modeller
+#### Linear Regression
 
+. Basit ve temel bir regresyon modelidir.
+
+. Değişkenler arasındaki doğrusal ilişkiyi öğrenir.
+
+. Random Forest’e kıyasla daha düşük performans göstermiştir.
+
+#### Random Forest Regressor (Final Model)
+
+. Doğrusal olmayan ilişkileri öğrenebilir.
+
+. Gürültülü ve karmaşık verilerde daha kararlı sonuçlar üretir.
+
+. Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçilmiştir.
 
 
 
