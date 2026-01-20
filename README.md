@@ -56,19 +56,27 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 ## Kullanılan Modeller
 #### Linear Regression
 
-. Basit ve temel bir regresyon modelidir.
+- Basit ve temel bir regresyon modelidir.
 
-. Değişkenler arasındaki doğrusal ilişkiyi öğrenir.
+- Değişkenler arasındaki doğrusal ilişkiyi öğrenir.
 
-. Random Forest’e kıyasla daha düşük performans göstermiştir.
+- Random Forest’e kıyasla daha düşük performans göstermiştir.
 
 #### Random Forest Regressor (Final Model)
 
-. Doğrusal olmayan ilişkileri öğrenebilir.
+- Doğrusal olmayan ilişkileri öğrenebilir.
 
-. Gürültülü ve karmaşık verilerde daha kararlı sonuçlar üretir.
+- Gürültülü ve karmaşık verilerde daha kararlı sonuçlar üretir.
 
-. Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçilmiştir.
+- Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçilmiştir.
+
+## Model Performans Karşılaştırması
+
+| Model | R² Skoru | MAE |
+|-------|----------|-----|
+| Linear Regression | 0.833 | 0.135 |
+| Random Forest Regressor | 0.891 | 0.093 |
+
 
 
 
