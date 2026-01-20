@@ -16,6 +16,25 @@ veri["time"] = pd.to_datetime(veri["time"], unit="s")
 veri.fillna(method="ffill", inplace=True)    
 ```
 ## Zaman ve Cihaz Tabanlı Özellikler
-Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlanmıştır. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirilmiştir. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlanmıştır.
+Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlanmıştır. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirilmiştir. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlanmıştır.   
+```python
+veri["hour"] = veri["time"].dt.hour
+veri["dayofweek"] = veri["time"].dt.dayofweek
+veri["month"] = veri["time"].dt.month
+
+appliance_cols = [
+    "Dishwasher [kW]", "Furnace 1 [kW]", "Furnace 2 [kW]",
+    "Home office [kW]", "Fridge [kW]", "Wine cellar [kW]",
+    "Garage door [kW]", "Kitchen 12 [kW]", "Kitchen 14 [kW]",
+    "Kitchen 38 [kW]", "Barn [kW]", "Well [kW]",
+    "Microwave [kW]", "Living room [kW]"
+]
+
+veri["appliance_total_kw"] = veri[appliance_cols].sum(axis=1)
+
+veri["prev_use_kw"] = veri["use [kW]"].shift(1)
+veri["prev_use_kw"].fillna(method="bfill", inplace=True)
+```
+
 
 
