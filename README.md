@@ -1,12 +1,12 @@
 # Smart Home Energy – Ml Projesi
 Bu çalışmanın amacı, Smart Home Energy veri setinden elde edilen zaman, cihaz kullanımı ve hava durumu verilerini kullanarak toplam elektrik tüketimini tahmin 
-eden bir makine öğrenmesi modeli geliştirmektir. Böylece kullanıcılar elektrik tüketimlerini daha iyi analiz edebilir ve enerji tasarrufu sağlayacak kararlar alabilir.  
+eden bir makine öğrenmesi modeli geliştirmek. Böylece kullanıcılar elektrik tüketimlerini analiz edebilir ve enerji tasarrufu sağlayacak kararlar alabilir.  
 
 ## Veriseti Hakkında 
-Bu projede Kaggle üzerinde paylaşılan Smart Home Energy Consumption and Weather veri seti kullanılmıştır. Veri seti; zaman bilgisi, evdeki farklı cihazların elektrik tüketimleri ve hava durumu değişkenlerini içermektedir.
+Bu projede Kaggle üzerinde paylaşılan Smart Home Energy Consumption and Weather veri seti kullanıldı. Veri seti; zaman bilgisi, evdeki farklı cihazların elektrik tüketimleri ve hava durumu değişkenlerini içermektedir.
 
 ## Veri Ön İşleme
-Veri setindeki time sütununda bazı hatalı değerler bulunduğu için önce sayısal formata çevrilmiş ve geçersiz satırlar temizlenmiştir. Daha sonra zaman bilgisi tarih  formatına dönüştürülerek analiz için uygun hale getirilmiştir. Aynı zamanda bazı sütunlarda eksik değerler bulunduğu için bu boşluklar bir önceki geçerli değerle doldurulmuştur. Böylece veri kaybı yaşanmadan modelleme sürecine devam edilmiştir.  
+Veri setindeki time sütununda bazı hatalı değerler bulunduğu için önce sayısal formata çevrildi ve geçersiz satırlar temizlendi. Daha sonra zaman bilgisi tarih  formatına dönüştürülerek analize uygun hale getirildi. Aynı zamanda bazı sütunlarda eksik değerler bulunduğu için bu boşluklar bir önceki geçerli değerle dolduruldu. Böylece veri kaybı yaşanmamamış oldu.  
 ```python  
 
 veri["time"] = pd.to_numeric(veri["time"], errors="coerce")  
@@ -16,7 +16,7 @@ veri["time"] = pd.to_datetime(veri["time"], unit="s")
 veri.fillna(method="ffill", inplace=True)    
 ```
 ## Zaman ve Cihaz Tabanlı Özellikler
-Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlanmıştır. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirilmiştir. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlanmıştır.   
+Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlandı. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirildi. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlandı.   
 ```python
 veri["hour"] = veri["time"].dt.hour
 veri["dayofweek"] = veri["time"].dt.dayofweek
@@ -37,8 +37,8 @@ veri["prev_use_kw"].fillna(method="bfill", inplace=True)
 ```
 
 ## Pivot Tablolar 
-Pivot tablolar, elektrik tüketiminin saat, gün, ay ve sıcaklığa göre nasıl değiştiğini görmek ve bu bilgileri modele yeni özellikler olarak eklemek için kullanılmıştır.  
-Pivot tablolar sayesinde model sadece anlık verilere değil, geçmiş tüketim ortalamalarına da erişmiş ve bu durum tahmin performansını önemli ölçüde artırmıştır.  
+Pivot tablolar, elektrik tüketiminin saat, gün, ay ve sıcaklığa göre nasıl değiştiğini görmek ve bu bilgileri modele yeni özellikler olarak eklemek için kullanıldı.  
+Pivot tablolar sayesinde model sadece anlık verilere değil, geçmişteki tüketim ortalamalarına da erişmiş oldu.  
 ```python
 
 hour_pivot = veri.pivot_table(index="hour", values="use [kW]", aggfunc="mean")
@@ -60,7 +60,7 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 
 - Değişkenler arasındaki doğrusal ilişkiyi öğrenir.
 
-- Random Forest’e kıyasla daha düşük performans göstermiştir.
+- Random Forest’e kıyasla daha düşük performans gösterdi.
 
 ### Random Forest Regressor 
 
@@ -68,7 +68,7 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 
 - Gürültülü ve karmaşık verilerde daha kararlı sonuçlar üretir.
 
-- Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçilmiştir.
+- Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçildi.
 
 ## Model Performans Karşılaştırması
 
@@ -78,7 +78,7 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 | Random Forest Regressor | 0.891 | 0.093 |
 
 ## Neden RandomForest En Başarılı Model Oldu ?
-Bu projede kullanılan veri setinde hedef değişken ile girdiler arasındaki ilişki doğrusal değildir. Linear Regression ise yalnızca doğrusal ilişkileri modelleyebilir.
+Bu projede kullanılan veri setinde hedef değişken ile girdiler arasındaki ilişki doğrusal değil. Linear Regression ise yalnızca doğrusal ilişkileri modelleyebilir.
 Random Forest ise:
 
 - Doğrusal olmayan ilişkileri öğrenebilir.
@@ -87,10 +87,10 @@ Random Forest ise:
 
 - Gürültülü ve dengesiz verilerde daha kararlı sonuç verir.
 
-Bu nedenle daha başarılı olmuştur.
+Bu nedenle daha başarılı oldu.
 
 ## Sonuç
-Bu çalışmada elektrik tüketim verileri analiz edilmiş ve makine öğrenmesi modelleri ile tahmin edilmeye çalışılmıştır. Zaman bilgileri, cihaz tüketimleri ve çevresel faktörler kullanılarak model performansı artırılmıştır. Yapılan denemeler sonucunda Random Forest modelinin en başarılı sonuçları verdiği görülmüştür. Bu sayede gelecekteki elektrik tüketimi daha doğru şekilde tahmin edilebilir hale gelmiştir.
+Bu çalışmada elektrik tüketim verileri analiz edildi ve makine öğrenmesi modelleri ile tahmin edilmeye çalışıldı. Zaman bilgileri, cihaz tüketimleri ve çevresel faktörler kullanılarak model performansı artırıldı. Yapılan denemeler sonucunda Random Forest modelinin en başarılı sonuçları verdiği görüldü. Bu sayede gelecekteki elektrik tüketimi daha doğru şekilde tahmin edilebilir hale gelmiş oldu.
 
 
 
