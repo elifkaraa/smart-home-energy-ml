@@ -36,5 +36,25 @@ veri["prev_use_kw"] = veri["use [kW]"].shift(1)
 veri["prev_use_kw"].fillna(method="bfill", inplace=True)
 ```
 
+## Pivot Tablolar 
+Pivot tablolar, elektrik tüketiminin saat, gün, ay ve sıcaklığa göre nasıl değiştiğini görmek ve bu bilgileri modele yeni özellikler olarak eklemek için kullanılmıştır.  
+Pivot tablolar sayesinde model sadece anlık verilere değil, geçmiş tüketim ortalamalarına da erişmiş ve bu durum tahmin performansını önemli ölçüde artırmıştır.  
+```python
+
+hour_pivot = veri.pivot_table(index="hour", values="use [kW]", aggfunc="mean")
+veri["hour_avg_kw"] = veri["hour"].map(hour_pivot["use [kW]"])
+
+day_pivot = veri.pivot_table(index="dayofweek", values="use [kW]", aggfunc="mean")
+veri["day_avg_kw"] = veri["dayofweek"].map(day_pivot["use [kW]"])
+
+month_pivot = veri.pivot_table(index="month", values="use [kW]", aggfunc="mean")
+veri["month_avg_kw"] = veri["month"].map(month_pivot["use [kW]"])
+
+temp_pivot = veri.pivot_table(index="temperature", values="use [kW]", aggfunc="mean")
+veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])  
+```
+
+
+
 
 
