@@ -69,8 +69,6 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 
 - Doğrusal olmayan ilişkileri öğrenebilir.
 
-- Gürültülü ve karmaşık verilerde daha kararlı sonuçlar üretir.
-
 - Daha yüksek R² ve daha düşük hata değerleri verdiği için final model olarak seçildi.
 
 ## Model Performans Karşılaştırması
@@ -90,8 +88,6 @@ Random Forest ise:
 - Doğrusal olmayan ilişkileri öğrenebilir.
 
 - Birden fazla karar ağacının ortalamasını alarak aşırı öğrenmeyi azaltır.
-
-- Gürültülü ve dengesiz verilerde daha kararlı sonuç verir.
 
 Bu nedenle daha başarılı oldu.
 
