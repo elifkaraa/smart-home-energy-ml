@@ -1,12 +1,15 @@
 # Smart Home Energy – Ml Projesi
-Çalışmamızın amacı, Smart Home Energy veri setinden elde edilen zaman, cihaz kullanımı ve hava durumu verilerini kullanarak toplam elektrik tüketimini tahmin 
-eden bir makine öğrenmesi modeli geliştirmek. Böylece kullanıcılar elektrik tüketimlerini analiz edebilir ve enerji tasarrufu sağlayacak kararlar alabilir.  
+Bu proje, evdeki cihazların elektrik kullanımını ve hava durumunu kullanarak toplam elektrik tüketimini tahmin etmeyi amaçlıyor. Böylece kullanıcılar elektrik kullanımını anlayıp tasarruf edebilir. 
 
 ## Veriseti Hakkında 
-Bu projede Kaggle üzerinde paylaşılan Smart Home Energy Consumption and Weather veri seti kullanıldı. Veri seti; zaman bilgisi, evdeki farklı cihazların elektrik tüketimleri ve hava durumu değişkenlerini içermektedir.
+Kaggle’daki Smart Home Energy ve Weather veri seti kullanıldı. İçinde zaman bilgisi, cihaz tüketimleri ve hava durumu var.
 
 ## Veri Ön İşleme
-Veri setindeki time sütununda bazı hatalı değerler bulunduğu için önce sayısal hale çevrildi ve geçersiz satırlar temizlendi. Daha sonra zaman bilgisi tarih  formatına dönüştürülerek analize uygun hale getirildi. Aynı zamanda bazı sütunlarda eksik değerler bulunduğu için bu boşluklar bir önceki geçerli değerle dolduruldu. Böylece veri kaybı yaşanmamamış oldu.  
+- Hatalı zaman değerleri düzeltildi ve eksik veriler bir önceki değerle dolduruldu.
+
+- Saat, gün ve ay bilgileri çıkarıldı.
+
+- Cihazların toplam tüketimi ve bir önceki zamanın tüketimi eklendi.  
 ```python  
 
 veri["time"] = pd.to_numeric(veri["time"], errors="coerce")  
@@ -16,7 +19,7 @@ veri["time"] = pd.to_datetime(veri["time"], unit="s")
 veri.fillna(method="ffill", inplace=True)    
 ```
 ## Zaman ve Cihaz Tabanlı Özellikler
-Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlandı. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirildi. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlandı.   
+Zaman bilgisinden saat, gün ve ay çıkarıldı, böylece modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlandı. Evdeki tüm cihazların elektrik tüketimi toplanıp tek sütun yapıldı ve bir önceki zamandaki tüketim de modele eklendi, böylece tahminler daha doğru oldu
 ```python
 veri["hour"] = veri["time"].dt.hour
 veri["dayofweek"] = veri["time"].dt.dayofweek
