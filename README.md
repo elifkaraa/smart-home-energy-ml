@@ -54,7 +54,7 @@ temp_pivot = veri.pivot_table(index="temperature", values="use [kW]", aggfunc="m
 veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])  
 ```
 ## Kullanılan Modeller
-#### Linear Regression
+### Linear Regression
 
 - Basit ve temel bir regresyon modelidir.
 
@@ -62,7 +62,7 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 
 - Random Forest’e kıyasla daha düşük performans göstermiştir.
 
-#### Random Forest Regressor (Final Model)
+### Random Forest Regressor 
 
 - Doğrusal olmayan ilişkileri öğrenebilir.
 
