@@ -7,11 +7,12 @@ Bu projede Kaggle üzerinde paylaşılan Smart Home Energy Consumption and Weath
 
 ## Veri Ön İşleme
 Veri setindeki time sütununda bazı hatalı değerler bulunduğu için önce sayısal formata çevrilmiş ve geçersiz satırlar temizlenmiştir. Daha sonra zaman bilgisi tarih  formatına dönüştürülerek analiz için uygun hale getirilmiştir. Aynı zamanda bazı sütunlarda eksik değerler bulunduğu için bu boşluklar bir önceki geçerli değerle doldurulmuştur. Böylece veri kaybı yaşanmadan modelleme sürecine devam edilmiştir.
-` python ` `
-veri["time"] = pd.to_numeric(veri["time"], errors="coerce")
-veri = veri.dropna(subset=["time"])
-veri["time"] = pd.to_datetime(veri["time"], unit="s")
+` python ` `  
+veri["time"] = pd.to_numeric(veri["time"], errors="coerce")  
+veri = veri.dropna(subset=["time"])  
+veri["time"] = pd.to_datetime(veri["time"], unit="s")  
 
-veri.fillna(method="ffill", inplace=True) ` ` `
+veri.fillna(method="ffill", inplace=True)  
+` ` `
 
 
