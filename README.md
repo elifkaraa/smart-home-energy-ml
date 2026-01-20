@@ -77,7 +77,20 @@ veri["temp_avg_kw"] = veri["temperature"].map(temp_pivot["use [kW]"])
 | Linear Regression | 0.833 | 0.135 |
 | Random Forest Regressor | 0.891 | 0.093 |
 
+## Neden RandomForest En Başarılı Model Oldu ?
+Bu projede kullanılan veri setinde hedef değişken ile girdiler arasındaki ilişki doğrusal değildir. Linear Regression ise yalnızca doğrusal ilişkileri modelleyebilir.
+Random Forest ise:
 
+- Doğrusal olmayan ilişkileri öğrenebilir.
+
+- Birden fazla karar ağacının ortalamasını alarak aşırı öğrenmeyi azaltır.
+
+- Gürültülü ve dengesiz verilerde daha kararlı sonuç verir.
+
+Bu nedenle daha başarılı olmuştur.
+
+## Sonuç
+Bu çalışmada elektrik tüketim verileri analiz edilmiş ve makine öğrenmesi modelleri ile tahmin edilmeye çalışılmıştır. Zaman bilgileri, cihaz tüketimleri ve çevresel faktörler kullanılarak model performansı artırılmıştır. Yapılan denemeler sonucunda Random Forest modelinin en başarılı sonuçları verdiği görülmüştür. Bu sayede gelecekteki elektrik tüketimi daha doğru şekilde tahmin edilebilir hale gelmiştir.
 
 
 
