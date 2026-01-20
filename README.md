@@ -15,5 +15,7 @@ veri["time"] = pd.to_datetime(veri["time"], unit="s")
 
 veri.fillna(method="ffill", inplace=True)    
 ```
+## Zaman ve Cihaz Tabanlı Özellikler
+Zaman bilgisinden saat, gün ve ay bilgileri çıkarılarak modelin zamanla değişen tüketim alışkanlıklarını öğrenmesi sağlanmıştır. Ayrıca evdeki tüm cihazların elektrik tüketimleri toplanarak tek bir sütun haline getirilmiştir. Son olarak, bir önceki zamandaki elektrik tüketimi modele eklenerek tahminlerin daha doğru yapılması amaçlanmıştır.
 
 
